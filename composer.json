@@ -1,7 +1,6 @@
 {
 	"name" : "sasedev/commons-bootstrap-bundle",
-	"description" : "dfls sdlsdf",
-	"version" : "1.0.0",
+	"description" : "Bootstrap 3 Bundle for Symfony2",
 	"require" : {
 		"php" : ">=5.5",
 		"symfony/config" : "~2.8|~3.0",
