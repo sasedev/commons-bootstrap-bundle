@@ -21,9 +21,11 @@ class TypeSetterExtension extends AbstractTypeExtension
 	 */
 	public function buildView(FormView $view, FormInterface $form, array $options)
 	{
+
 		$view->vars['original_type'] = $form->getConfig()
 			->getType()
-			->getName();
+			->getBlockPrefix();
+
 	}
 
 	/**
@@ -32,6 +34,9 @@ class TypeSetterExtension extends AbstractTypeExtension
 	 */
 	public function getExtendedType()
 	{
+
 		return FormType::class;
+
 	}
+
 }
