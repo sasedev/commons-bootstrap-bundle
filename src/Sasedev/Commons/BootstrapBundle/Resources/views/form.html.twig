@@ -163,7 +163,7 @@
 
 	<select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
 		{% if placeholder is not none %}
-			<option{% if required %} disabled="disabled"{% if value is empty %} selected="selected"{% endif %}{% else %} value=""{% endif %}>{% if attr.empty_label_trans is not defined or (attr.empty_label_trans is defined and attr.empty_label_trans != false) %}{{ empty_value|trans({}, translation_domain) }}{% else %}{{ empty_value }}{% endif %}</option>
+			<option{% if required %} disabled="disabled"{% if value is empty %} selected="selected"{% endif %}{% else %} value=""{% endif %}>{% if attr.empty_label_trans is not defined or (attr.empty_label_trans is defined and attr.empty_label_trans != false) %}{{ placeholder|trans({}, translation_domain) }}{% else %}{{ empty_value }}{% endif %}</option>
 		{% endif %}
 		{% if preferred_choices|length > 0 %}
 			{% set options = preferred_choices %}
