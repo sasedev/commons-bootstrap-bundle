@@ -71,8 +71,7 @@ class BootstrapCollectionType extends AbstractType
 	}
 
 	/**
-	 *
-	 * {@inheritDoc} @see AbstractType::getName()
+	 * return Name
 	 */
 	public function getName()
 	{
