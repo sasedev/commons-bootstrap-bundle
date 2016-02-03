@@ -544,7 +544,13 @@
 		<div class="col-lg-{{ attr.imbricate }}">
 	{% endif %}
 
-	<div class="form-group{{ row_class }}{% if not form.vars.valid %} has-error{% endif %}" {%if row_id is defined and row_id is not empty%}id="{{row_id}}"{%endif%}>
+	{% if attr.hasfeedback is defined and attr.hasfeedback is not empty %}
+		{% set hasfeedback = attr.hasfeedback %}
+	{% endif %}
+	{% set hasfeedback = hasfeedback|default({}) %}
+
+
+	<div class="form-group{{ row_class }}{% if not form.vars.valid %} has-error{% endif %}{% if hasfeedback is not empty %} has-feedback{% endif %}" {%if row_id is defined and row_id is not empty%}id="{{row_id}}"{%endif%}>
 		{% if style == 'horizontal' %}
 			{{ form_label(form) }}
 			<div class="col-lg-{{ widget_col }}">
@@ -580,6 +586,10 @@
 		{% set input_group = attr.input_group %}
 	{% endif %}
 	{% set input_group = input_group|default({}) %}
+	{% if attr.hasfeedback is defined and attr.hasfeedback is not empty %}
+		{% set hasfeedback = attr.hasfeedback %}
+	{% endif %}
+	{% set hasfeedback = hasfeedback|default({}) %}
 	{% if input_group is not empty %}
 		{% set ig_size_class = '' %}
 		{% if input_group.size is defined and input_group.size == 'large' %}
@@ -597,9 +607,13 @@
 				<span class="input-group-addon">{{ input_group.append|raw }}</span>
 			{% endif %}
 		</div>
+	{% elseif hasfeedback is not empty %}
+		{{ form_widget(form) }}
+		<span class="form-control-feedback {{ hasfeedback|raw }}"></span>
 	{% else %}
 		{{ form_widget(form) }}
 	{% endif %}
+
 {% endspaceless %}
 {% endblock form_input_group %}
 

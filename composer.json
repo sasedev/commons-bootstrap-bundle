@@ -1,6 +1,17 @@
 {
 	"name" : "sasedev/commons-bootstrap-bundle",
 	"description" : "Bootstrap 3 Bundle for Symfony2",
+	"keywords" : [
+		"symfony2",
+		"bootstrap 3"
+	],
+	"authors" : [{
+			"name" : "Salah Abdelkader Seif Eddine",
+			"email" : "seif.salah@gmail.com"
+		}
+	],
+	"license" : "MIT",
+	"type" : "symfony-bundle",
 	"require" : {
 		"php" : ">=5.5",
 		"symfony/config" : "~2.8|~3.0",
@@ -9,21 +20,19 @@
 		"symfony/http-kernel" : "~2.8|~3.0",
 		"symfony/twig-bridge" : "~2.8|~3.0"
 	},
-	"license" : "MIT",
-	"keywords" : ["symfony2", "bootstrap 3"],
+	"autoload" : {
+		"psr-4" : {
+			"" : "src"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"" : "tests"
+		}
+	},
 	"extra" : {
 		"branch-alias" : {
 			"dev-master" : "1.0.x-dev"
 		}
-	},
-	"autoload" : {
-		"psr-4" : {
-			"Sasedev\\Commons\\BootstrapBundle\\" : "src/Sasedev/Commons/BootstrapBundle"
-		}
-	},
-	"type" : "symfony-bundle",
-	"authors" : [ {
-		"name" : "Salah Abdelkader Seif Eddine",
-		"email" : "seif.salah@gmail.com"
-	} ]
+	}
 }
