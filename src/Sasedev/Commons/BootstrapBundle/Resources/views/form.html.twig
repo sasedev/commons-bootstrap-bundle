@@ -285,10 +285,10 @@
 			{% endif %}
 			<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 				{{ block('radio_widget') }}
-				{% if attr.choice_label_trans is not defined or (attr.choice_label_trans is defined and attr.choice_label_trans != false) %}
-				{{ label|trans({}, translation_domain) }}
-				{% else %}
+				{% if attr.choice_label_trans is not defined or (attr.choice_label_trans is defined and attr.choice_label_trans != true) %}
 				{{ label }}
+				{% else %}
+				{{ label|trans({}, translation_domain) }}
 				{% endif %}
 			</label>
 		{% else %}
