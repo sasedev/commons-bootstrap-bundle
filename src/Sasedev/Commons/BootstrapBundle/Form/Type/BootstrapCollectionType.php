@@ -71,13 +71,6 @@ class BootstrapCollectionType extends AbstractType
       'button_col' => 2,
       'options' => array()
     );
-
-    if (Kernel::VERSION_ID >= 20800) {
-      $defaults['entry_type'] = 'Symfony\Component\Form\Extension\Core\Type\TextType';
-    } else {
-      // map old class to new one using LegacyFormHelper
-      $defaults['type'] = LegacyFormHelper::getType('text');
-    }
     $resolver->setDefaults($defaults);
     $resolver->setNormalizer('options', $optionsNormalizer);
   }
