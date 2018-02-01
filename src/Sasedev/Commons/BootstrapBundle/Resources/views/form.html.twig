@@ -73,7 +73,7 @@
 		{% endif %}
 		{% set prototype_html = '<div class="col-lg-' ~ form.vars.sub_widget_col ~ '">' ~ form_widget(prototype, prototype_vars) ~ '</div>' %}
 		{% if form.vars.allow_delete %}
-			{% set prototype_html = prototype_html ~ '<div class="col-lg-' ~ form.vars.button_col ~ '"><a class="btn btn-danger btn-small" data-removefield="collection" data-field="__id__">' ~ form.vars.delete_button_text|trans({}, translation_domain)|raw %}
+			{% set prototype_html = prototype_html ~ '<div class="col-lg-' ~ form.vars.button_col ~ '"><a class="btn btn-danger btn-small" data-removefield="collection" data-field="__id__">' ~ form.vars.delete_button_text|trans|raw %}
 			{% if form.vars.delete_icon %}{% set prototype_html = prototype_html ~ ' ' ~ glyphIco(form.vars.delete_icon) %}{% endif %}
 			{% set prototype_html = prototype_html ~ '</a></div>' %}
 		{% endif %}
@@ -93,7 +93,7 @@
 						</div>
 						{% if form.vars.allow_delete %}
 							<div class="col-lg-{{ form.vars.button_col }}">
-								<a class="btn btn-danger btn-small" data-removefield="collection" data-field="{{ field.vars.id }}">{{ form.vars.delete_button_text|trans({}, translation_domain)|raw }} {% if form.vars.delete_icon %}{{glyphIco(form.vars.delete_icon)}}{% endif %}</a>
+								<a class="btn btn-danger btn-small" data-removefield="collection" data-field="{{ field.vars.id }}">{{ form.vars.delete_button_text|trans|raw }} {% if form.vars.delete_icon %}{{glyphIco(form.vars.delete_icon)}}{% endif %}</a>
 							</div>
 						{% endif %}
 					</div>
@@ -101,7 +101,7 @@
 			{% endfor %}
 		</ul>
 		{% if form.vars.allow_add %}
-			<div class="text-right"><a class="btn btn-primary btn-small" data-addfield="collection" data-collection="{{ form.vars.id }}" data-prototype-name="{{ prototype_name }}">{{ form.vars.add_button_text|trans({}, translation_domain)|raw }} {% if form.vars.add_icon %}{{glyphIco(form.vars.add_icon)}}{% endif %}</a></div>
+			<div class="text-right"><a class="btn btn-primary btn-small" data-addfield="collection" data-collection="{{ form.vars.id }}" data-prototype-name="{{ prototype_name }}">{{ form.vars.add_button_text|trans|raw }} {% if form.vars.add_icon %}{{glyphIco(form.vars.add_icon)}}{% endif %}</a></div>
 		{% endif %}
 	</div>
 {% endspaceless %}
@@ -163,7 +163,7 @@
 
 	<select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
 		{% if placeholder is not none %}
-			<option{% if required %} disabled="disabled"{% if value is empty %} selected="selected"{% endif %}{% else %} value=""{% endif %}>{% if attr.empty_label_trans is not defined or (attr.empty_label_trans is defined and attr.empty_label_trans != false) %}{{ placeholder|trans({}, translation_domain) }}{% else %}{{ empty_value }}{% endif %}</option>
+			<option{% if required %} disabled="disabled"{% if value is empty %} selected="selected"{% endif %}{% else %} value=""{% endif %}>{% if attr.empty_label_trans is not defined or (attr.empty_label_trans is defined and attr.empty_label_trans != false) %}{{ placeholder|trans }}{% else %}{{ empty_value }}{% endif %}</option>
 		{% endif %}
 		{% if preferred_choices|length > 0 %}
 			{% set options = preferred_choices %}
@@ -182,12 +182,12 @@
 {% spaceless %}
 	{% for group_label, choice in options %}
 		{% if choice is iterable %}
-			<optgroup label="{% if attr.group_label_trans is not defined or (attr.group_label_trans is defined and attr.group_label_trans != false) %}{{ group_label|trans({}, translation_domain) }}{% else %}{{ group_label }}{% endif %}">
+			<optgroup label="{% if attr.group_label_trans is not defined or (attr.group_label_trans is defined and attr.group_label_trans != false) %}{{ group_label|trans }}{% else %}{{ group_label }}{% endif %}">
 				{% set options = choice %}
 				{{ block('choice_widget_options') }}
 			</optgroup>
 		{% else %}
-			<option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{% if attr.choice_label_trans is not defined or (attr.choice_label_trans is defined and attr.choice_label_trans != true) %}{{ choice.label }}{% else %}{{ choice.label|trans({}, translation_domain) }}{% endif %}</option>
+			<option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{% if attr.choice_label_trans is not defined or (attr.choice_label_trans is defined and attr.choice_label_trans != true) %}{{ choice.label }}{% else %}{{ choice.label|trans }}{% endif %}</option>
 		{% endif %}
 	{% endfor %}
 {% endspaceless %}
@@ -232,7 +232,7 @@
 				{% set label = name|humanize %}
 			{% endif %}
 			{% if label_col != 0 %}
-			<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain)|raw }}</label>
+			<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans|raw }}</label>
 			{% endif %}
 		{% endif %}
 		{% if align_with_widget is defined or attr.align_with_widget is defined %}
@@ -288,7 +288,7 @@
 				{% if attr.choice_label_trans is not defined or (attr.choice_label_trans is defined and attr.choice_label_trans != true) %}
 				{{ label }}
 				{% else %}
-				{{ label|trans({}, translation_domain) }}
+				{{ label|trans }}
 				{% endif %}
 			</label>
 		{% else %}
@@ -441,7 +441,7 @@
 		{% set label = name|humanize %}
 	{% endif %}
 	{% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' btn')|trim }) %}
-	<button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain)|raw }}</button>
+	<button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans|raw }}</button>
 {% endspaceless %}
 {% endblock button_widget %}
 
@@ -491,7 +491,7 @@
 			{% set label = name|humanize %}
 		{% endif %}
 		{% if label_col != 0 %}
-		<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain)|raw }}</label>
+		<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans|raw }}</label>
 		{% endif %}
 	{% endif %}
 {% endspaceless %}
@@ -738,7 +738,7 @@
 	{% if errors|length > 0 %}
 		<div{% if not global_errors %} class="help-block"{% endif %}>
 			{% for error in errors %}
-				{{ error.message|trans({}, translation_domain)|raw }}<br>
+				{{ error.message|trans|raw }}<br>
 			{% endfor %}
 		</div>
 	{% endif %}
@@ -768,7 +768,7 @@
 {% block widget_attributes %}
 {% spaceless %}
 	id="{{ id }}" name="{{ full_name }}"{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}
-	{% for attrname, attrvalue in attr %}{% if attrname in ['placeholder', 'title','pattern','maxlength'] %}{{ attrname }}="{{ attrvalue|trans({}, translation_domain)|raw }}" {% elseif attrname in ['input_group'] %}{% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %}
+	{% for attrname, attrvalue in attr %}{% if attrname in ['placeholder', 'title','pattern','maxlength'] %}{{ attrname }}="{{ attrvalue|trans|raw }}" {% elseif attrname in ['input_group'] %}{% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %}
 {% endspaceless %}
 {% endblock widget_attributes %}
 
